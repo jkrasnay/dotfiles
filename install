@@ -1,0 +1,12 @@
+#!/bin/sh
+
+for FILE in gitconfig vimrc; do
+    if [ -f ~/.$FILE ]; then
+        echo "~/.$FILE already exists"
+    else
+        FULL=`readlink -f $FILE`
+        echo "~/.$FILE -> $FULL"
+        ln -s `readlink -f $FILE` ~/.$FILE
+    fi
+done
+
