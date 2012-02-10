@@ -1,5 +1,8 @@
 set et sw=4 sts=4 nu
 
+" Respect modelines in files being edited
+set modeline
+
 syntax on
 filetype plugin indent on
 set background=light
