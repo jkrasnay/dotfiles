@@ -20,3 +20,7 @@ nmap <f5> :wa<Enter>:!ant<Enter>
 " Delete from the current line to the end of the buffer
 nnoremap <S-C-j> :.,$d<Enter>
 
+" Sudo when needed
+" From http://www.commandlinefu.com/commands/view/1204/save-a-file-you-edited-in-vim-without-the-needed-permissions
+cmap w!! %!sudo tee > /dev/null %
+
