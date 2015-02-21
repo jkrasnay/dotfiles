@@ -110,15 +110,50 @@ let mapleader = ","
 nmap Q gqap
 
 nnoremap <Leader>n :NERDTreeToggle<CR>
+nnoremap <leader>f :NERDTreeFind<CR>
+let NERDTreeQuitOnOpen=1
+let NERDTreeWinSize=60
+
+" ,d to show the TernDef definition
+" TODO make this specific to Javascript
 nnoremap <Leader>d :TernDef<CR>
+
+" ,ev to quick-edit my .vimrc
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+
+" ,sv to re-source my .vimrc
+nnoremap <leader>sv :source $MYVIMRC<cr>
+
+" Normally, <c-w>v clones the current buffer
+" This causes it to create a new, blank window to the right
+set splitright
+nnoremap <c-w>v :vnew<cr>
+
 
 "============================================================
 " File types
 "============================================================
 
-au BufRead,BufNewFile *.md,*.markdown,*.txt             set tw=72
-au BufRead,BufNewFile *.css,*.less,*.js,*.html,*.xml    set sw=2 sts=2
-au FileType mail                                        set tw=72
+" See: http://learnvimscriptthehardway.stevelosh.com/chapters/14.html
+augroup local
+
+    autocmd!
+
+    " Show filename in window title
+    autocmd BufEnter * let &titlestring = expand("%:t") | set title
+
+    " Tab and word-wrap settings
+    autocmd BufRead,BufNewFile *.md,*.markdown,*.txt             set tw=72
+    autocmd BufRead,BufNewFile *.css,*.less,*.js,*.html,*.xml    set sw=2 sts=2
+    autocmd FileType mail                                        set tw=72
+
+    " Trim trailing whitespace on save
+    autocmd BufWritePre * :%s/\s\+$//e
+
+    " In quickfix window, use Space to show file w/o changing windows
+    autocmd FileType qf nnoremap <buffer> <space> <cr><c-w><c-p>
+
+augroup END
 
 let g:sql_type_default = 'pgsql'
 
@@ -137,4 +172,31 @@ set wildmode=longest,list
 " TODO figure out how to only enable this when in Markdown mode
 "command -nargs=1 Code :normal i{% highlight <args> %}<Enter><Enter>{% endhighlight %}<Up>
 
+
+"============================================================
+" Status line
+"============================================================
+
+" Always show the status line
+set laststatus=2
+
+set statusline=%f  "filename relative to current directory
+set statusline+=%m "modified
+set statusline+=\ %y "type
+"eol format and encoding
+set statusline+=\ [%{&ff},%{strlen(&fenc)?&fenc:'none'}]
+"column
+set statusline+=\ C%c
+"current line and total lines
+set statusline+=\ L%l/%L
+
+
+
+
+"============================================================
+" Resources
+"============================================================
+" - http://learnvimscriptthehardway.stevelosh.com/
+"
+"
 
