@@ -4,19 +4,29 @@ set et sw=4 sts=4 nu
 " Vundle setup
 "============================================================
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+" NOTE: INSTALL VUNDLE OR YOU'LL SEE VIM STARTUP ERRORS
+" See here: https://github.com/gmarik/Vundle.vim
+
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
 
 "
-" When adding plugins here, remember to run "so ~/.vimrc" and :BundleInstall" afterwards
+" When adding plugins here, remember to run "so ~/.vimrc" and :PluginInstall" afterwards
 "
-Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/syntastic'
-Bundle 'HTML-AutoCloseTag'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'tpope/vim-markdown'
-Bundle 'marijnh/tern_for_vim'
-Bundle 'altercation/vim-colors-solarized'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/syntastic'
+Plugin 'HTML-AutoCloseTag'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'tpope/vim-markdown'
+Plugin 'marijnh/tern_for_vim'
+Plugin 'altercation/vim-colors-solarized'
 
 " Recommended by http://oli.me.uk/2013/06/29/equipping-vim-for-javascript/
 " Improves JS syntax highlighting
@@ -25,9 +35,12 @@ Plugin 'jelera/vim-javascript-syntax'
 " Recommended by http://oli.me.uk/2013/06/29/equipping-vim-for-javascript/
 " Improves JS indentation and syntax highlighting
 " Note: required Vim 7.4 with patches 1-7. Check with :version to be sure.
-Bundle "pangloss/vim-javascript"
+Plugin 'pangloss/vim-javascript'
 
-Bundle "godlygeek/tabular"
+" Tabular alignment plugin
+" Put your cursor in the block and run the Tab command to align on the given
+" regex, e.g. `:Tab /|` to align pipes, `:Tab /=` to align equals signs
+Plugin 'godlygeek/tabular'
 
 " Recommended by http://oli.me.uk/2013/06/29/equipping-vim-for-javascript/
 " Auto-types matching brackets, quotes, etc.
@@ -44,6 +57,21 @@ Bundle "godlygeek/tabular"
 " https://github.com/mhinz/vim-signify (show diffs from git, also see gitgutter)
 " https://github.com/Shougo/unite.vim (fuzzy search for things, apparently better than ctrlp)
 
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
 
 "============================================================
 " General settings
