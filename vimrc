@@ -23,9 +23,15 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'HTML-AutoCloseTag'
+
+" Requires a external build step.
+" See: https://github.com/Valloric/YouCompleteMe
 Plugin 'Valloric/YouCompleteMe'
+
 Plugin 'tpope/vim-markdown'
+
 Plugin 'marijnh/tern_for_vim'
+
 Plugin 'altercation/vim-colors-solarized'
 
 " Recommended by http://oli.me.uk/2013/06/29/equipping-vim-for-javascript/
