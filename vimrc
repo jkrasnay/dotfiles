@@ -48,6 +48,9 @@ Plugin 'pangloss/vim-javascript'
 " regex, e.g. `:Tab /|` to align pipes, `:Tab /=` to align equals signs
 Plugin 'godlygeek/tabular'
 
+" Syntax coloring for LessCSS
+Plugin 'groenewege/vim-less'
+
 " Recommended by http://oli.me.uk/2013/06/29/equipping-vim-for-javascript/
 " Auto-types matching brackets, quotes, etc.
 "Plugin 'Raimondi/delimitMate' " This is just annoying, as you have to hit the delimiter anyway
@@ -144,6 +147,7 @@ augroup local
 
     " Tab and word-wrap settings
     autocmd BufRead,BufNewFile *.md,*.markdown,*.txt             set tw=72
+    autocmd BufRead,BufNewFile *.md,*.markdown,*.txt             setlocal spell spelllang=en_ca
     autocmd BufRead,BufNewFile *.css,*.less,*.js,*.html,*.xml    set sw=2 sts=2
     autocmd FileType mail                                        set tw=72
 
