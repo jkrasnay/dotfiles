@@ -22,7 +22,7 @@ Plugin 'gmarik/Vundle.vim'
 "
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
-Plugin 'HTML-AutoCloseTag'
+Plugin 'kien/ctrlp.vim'
 
 " Requires a external build step.
 " See: https://github.com/Valloric/YouCompleteMe
@@ -32,7 +32,8 @@ Plugin 'tpope/vim-markdown'
 
 Plugin 'marijnh/tern_for_vim'
 
-Plugin 'altercation/vim-colors-solarized'
+"Plugin 'altercation/vim-colors-solarized'
+Plugin 'vinitkumar/vim-tomorrow-theme'
 
 " Recommended by http://oli.me.uk/2013/06/29/equipping-vim-for-javascript/
 " Improves JS syntax highlighting
@@ -51,6 +52,26 @@ Plugin 'godlygeek/tabular'
 " Syntax coloring for LessCSS
 Plugin 'groenewege/vim-less'
 
+" Clojure REPL support
+Plugin 'tpope/vim-fireplace'
+
+" Support for s-expressions
+" Examples:
+"
+" yaf - Yank a form, e.g. everything inside the immediate (), [], or {}
+" daF - Delete the current top-level form
+" ==  - indents the current COMPOUND FORM without moving the cursor
+" =-  - indents the current top-level COMPOUND FORM without moving the cursor
+"
+Plugin 'guns/vim-sexp'
+" disable auto insertion of matching parens
+let g:sexp_enable_insert_mode_mappings = 0
+
+" Slamhound rewrites the ns declaration for Clojure namespaces
+" It's like an "organize imports" for Clojure
+" See the screencast here: https://vimeo.com/80650659
+Plugin 'guns/vim-slamhound'
+
 " Recommended by http://oli.me.uk/2013/06/29/equipping-vim-for-javascript/
 " Auto-types matching brackets, quotes, etc.
 "Plugin 'Raimondi/delimitMate' " This is just annoying, as you have to hit the delimiter anyway
@@ -65,6 +86,20 @@ Plugin 'groenewege/vim-less'
 " https://github.com/tpope/vim-fugitive (git client)
 " https://github.com/mhinz/vim-signify (show diffs from git, also see gitgutter)
 " https://github.com/Shougo/unite.vim (fuzzy search for things, apparently better than ctrlp)
+
+" Fancy status line
+Plugin 'bling/vim-airline'
+let g:airline_powerline_fonts=1
+
+" Sane editing of Ansible YAML files
+Plugin 'chase/vim-ansible-yaml'
+
+" GIT interface
+Plugin 'tpope/vim-fugitive'
+
+" Requires silver searcher to be installed
+" https://github.com/ggreer/the_silver_searcher
+Plugin 'rking/ag.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -95,12 +130,14 @@ set modeline
 
 syntax on
 filetype plugin indent on
-set background=light
-colorscheme solarized
-let g:solarized_termcolors=256
-"Not sure if the setting below is still required, given the setting above
-se t_Co=16
+set background=dark
+se t_Co=256
 
+"colorscheme solarized
+"let g:solarized_termcolors=256
+
+colorscheme Tomorrow-Night-Bright
+let g:colors_name="Tomorrow-Night-Bright"
 
 "============================================================
 " Key mappings
@@ -150,6 +187,7 @@ augroup local
     autocmd BufRead,BufNewFile *.md,*.markdown,*.txt             setlocal spell spelllang=en_ca
     autocmd BufRead,BufNewFile *.css,*.less,*.js,*.html,*.xml    set sw=2 sts=2
     autocmd FileType mail                                        set tw=72
+    autocmd BufRead,BufNewFile *.cljc                            set ft=clojure
 
     " Trim trailing whitespace on save
     autocmd BufWritePre * :%s/\s\+$//e
@@ -184,16 +222,22 @@ set wildmode=longest,list
 " Always show the status line
 set laststatus=2
 
-set statusline=%f  "filename relative to current directory
-set statusline+=%m "modified
-set statusline+=\ %y "type
-"eol format and encoding
-set statusline+=\ [%{&ff},%{strlen(&fenc)?&fenc:'none'}]
-"column
-set statusline+=\ C%c
-"current line and total lines
-set statusline+=\ L%l/%L
+"set statusline=%f  "filename relative to current directory
+"set statusline+=%m "modified
+"set statusline+=\ %y "type
+""eol format and encoding
+"set statusline+=\ [%{&ff},%{strlen(&fenc)?&fenc:'none'}]
+""column
+"set statusline+=\ C%c
+""current line and total lines
+"set statusline+=\ L%l/%L
 
+
+"============================================================
+" vim-fireplace mappings
+"============================================================
+
+nnoremap <C-e> :Eval<cr>
 
 
 
