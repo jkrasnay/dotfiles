@@ -10,6 +10,9 @@ set et sw=4 sts=4 nu
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
+" Required when running Fish shell
+set shell=bash
+
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -32,7 +35,7 @@ Plugin 'tpope/vim-markdown'
 
 Plugin 'marijnh/tern_for_vim'
 
-"Plugin 'altercation/vim-colors-solarized'
+Plugin 'altercation/vim-colors-solarized'
 Plugin 'vinitkumar/vim-tomorrow-theme'
 
 " Recommended by http://oli.me.uk/2013/06/29/equipping-vim-for-javascript/
@@ -54,6 +57,12 @@ Plugin 'groenewege/vim-less'
 
 " Clojure REPL support
 Plugin 'tpope/vim-fireplace'
+
+" Clojure support for Leiningen
+Plugin 'tpope/vim-salve'
+
+" Clojure Syntastic checking
+Plugin 'venantius/vim-eastwood'
 
 " Support for s-expressions
 " Examples:
@@ -130,14 +139,14 @@ set modeline
 
 syntax on
 filetype plugin indent on
-set background=dark
+set background=light
 se t_Co=256
 
 "colorscheme solarized
 "let g:solarized_termcolors=256
 
-colorscheme Tomorrow-Night-Bright
-let g:colors_name="Tomorrow-Night-Bright"
+colorscheme Tomorrow
+"let g:colors_name="Tomorrow-Night-Bright"
 
 "============================================================
 " Key mappings
@@ -186,6 +195,7 @@ augroup local
     autocmd BufRead,BufNewFile *.md,*.markdown,*.txt             set tw=72
     autocmd BufRead,BufNewFile *.md,*.markdown,*.txt             setlocal spell spelllang=en_ca
     autocmd BufRead,BufNewFile *.css,*.less,*.js,*.html,*.xml    set sw=2 sts=2
+    autocmd FileType less set sw=2 sts=2
     autocmd FileType mail                                        set tw=72
     autocmd BufRead,BufNewFile *.cljc                            set ft=clojure
 
@@ -238,6 +248,7 @@ set laststatus=2
 "============================================================
 
 nnoremap <C-e> :Eval<cr>
+nnoremap <S-C-e> :%Eval<cr>
 
 
 
