@@ -27,13 +27,25 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'kien/ctrlp.vim'
 
-" Requires a external build step.
-" See: https://github.com/Valloric/YouCompleteMe
-Plugin 'Valloric/YouCompleteMe'
-
 Plugin 'tpope/vim-markdown'
 
-Plugin 'marijnh/tern_for_vim'
+" Tabular alignment plugin
+" Put your cursor in the block and run the Tab command to align on the given
+" regex, e.g. `:Tab /|` to align pipes, `:Tab /=` to align equals signs
+Plugin 'godlygeek/tabular'
+
+" Syntax coloring for LessCSS
+Plugin 'groenewege/vim-less'
+
+"------------------------------------------------------------
+" Javascript
+"
+
+" Requires a external build step.
+" See: https://github.com/Valloric/YouCompleteMe
+"Plugin 'Valloric/YouCompleteMe'
+
+"Plugin 'marijnh/tern_for_vim'
 
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'vinitkumar/vim-tomorrow-theme'
@@ -47,13 +59,9 @@ Plugin 'jelera/vim-javascript-syntax'
 " Note: required Vim 7.4 with patches 1-7. Check with :version to be sure.
 Plugin 'pangloss/vim-javascript'
 
-" Tabular alignment plugin
-" Put your cursor in the block and run the Tab command to align on the given
-" regex, e.g. `:Tab /|` to align pipes, `:Tab /=` to align equals signs
-Plugin 'godlygeek/tabular'
-
-" Syntax coloring for LessCSS
-Plugin 'groenewege/vim-less'
+"------------------------------------------------------------
+" Clojure/ClojureScript
+"
 
 " Clojure REPL support
 Plugin 'tpope/vim-fireplace'
@@ -80,6 +88,10 @@ let g:sexp_enable_insert_mode_mappings = 0
 " It's like an "organize imports" for Clojure
 " See the screencast here: https://vimeo.com/80650659
 Plugin 'guns/vim-slamhound'
+
+
+
+
 
 " Recommended by http://oli.me.uk/2013/06/29/equipping-vim-for-javascript/
 " Auto-types matching brackets, quotes, etc.
@@ -109,6 +121,9 @@ Plugin 'tpope/vim-fugitive'
 " Requires silver searcher to be installed
 " https://github.com/ggreer/the_silver_searcher
 Plugin 'rking/ag.vim'
+
+" Syntax coloring for Terraform files
+Plugin 'vim-scripts/vim-terraform'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -155,9 +170,6 @@ colorscheme Tomorrow
 inoremap jj <Esc>
 let mapleader = ","
 
-" Reformat the current paragraph
-nmap Q gqap
-
 nnoremap <Leader>n :NERDTreeToggle<CR>
 nnoremap <leader>f :NERDTreeFind<CR>
 let NERDTreeQuitOnOpen=1
@@ -177,6 +189,9 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 " This causes it to create a new, blank window to the right
 set splitright
 nnoremap <c-w>v :vnew<cr>
+
+" Map omnicomplete to Ctrl-Space
+inoremap <c-space> <c-x><c-o>
 
 
 "============================================================
