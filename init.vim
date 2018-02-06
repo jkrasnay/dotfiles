@@ -31,9 +31,10 @@ Plug 'kien/ctrlp.vim'
 
 Plug 'tpope/vim-markdown'
 
-" Tabular alignment plugin
-" Put your cursor in the block and run the Tab command to align on the given
-" regex, e.g. `:Tab /|` to align pipes, `:Tab /=` to align equals signs
+" Alignment plugin
+" Select your block of text to align then enter :Tab /= to align, say, on the
+" = sign. Don't forget the slash!
+" More info here: http://vimcasts.org/episodes/aligning-text-with-tabular-vim/
 Plug 'godlygeek/tabular'
 
 " Syntax coloring for LessCSS
@@ -42,6 +43,10 @@ Plug 'groenewege/vim-less'
 " Shows pipe chars for indented lines
 " Disabled cuz it looks terrible in Clojure
 "Plug 'Yggdroot/indentLine'
+
+" Show matching parens in different colors
+Plug 'luochen1990/rainbow'
+let g:rainbow_active = 1
 
 "------------------------------------------------------------
 " Javascript
@@ -179,6 +184,9 @@ set background=dark
 colorscheme gruvbox
 let g:gruvbox_italic=0
 
+" highlight the line containing the cursor
+set cursorline
+
 "============================================================
 " Key mappings
 "============================================================
@@ -238,8 +246,23 @@ augroup local
 
 augroup END
 
+"----------------------------------------
+" SQL
+"----------------------------------------
 let g:sql_type_default = 'pgsql'
 
+"----------------------------------------
+" Clojure
+"----------------------------------------
+
+" Hit <f3> to go to symbol definition
+au FileType clojure nnoremap <buffer> <f3> [<c-d>
+
+"----------------------------------------
+" XML
+"----------------------------------------
+let g:xml_syntax_folding = 1
+au FileType xml setlocal foldmethod=syntax
 
 "============================================================
 " Search settings

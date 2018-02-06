@@ -37,6 +37,10 @@ Plugin 'godlygeek/tabular'
 " Syntax coloring for LessCSS
 Plugin 'groenewege/vim-less'
 
+" Shows pipe chars for indented lines
+" Disabled cuz it looks terrible in Clojure
+"Plugin 'Yggdroot/indentLine'
+
 "------------------------------------------------------------
 " Javascript
 "
@@ -100,7 +104,7 @@ Plugin 'guns/vim-slamhound'
 "let delimitMate_expand_cr = 1
 
 " All the colorschemes!
-"Plugin 'flazz/vim-colorschemes'
+Plugin 'flazz/vim-colorschemes'
 
 " New plugins to try
 " https://github.com/msanders/snipmate.vim
@@ -154,14 +158,20 @@ set modeline
 
 syntax on
 filetype plugin indent on
-set background=light
 se t_Co=256
 
 "colorscheme solarized
+"set background=light
 "let g:solarized_termcolors=256
 
-colorscheme Tomorrow
+"colorscheme Tomorrow
+"set background=light
+"highlight LineNr ctermbg=LightGrey
 "let g:colors_name="Tomorrow-Night-Bright"
+
+set background=dark
+colorscheme gruvbox
+let g:gruvbox_italic=0
 
 "============================================================
 " Key mappings
@@ -191,7 +201,8 @@ set splitright
 nnoremap <c-w>v :vnew<cr>
 
 " Map omnicomplete to Ctrl-Space
-inoremap <c-space> <c-x><c-o>
+"inoremap <c-space> <c-x><c-o> " <-- doesn't work!
+inoremap <nul> <c-x><c-o>
 
 
 "============================================================
