@@ -192,22 +192,10 @@ set cursorline
 "============================================================
 
 inoremap jj <Esc>
-let mapleader = ","
+let mapleader = " "
 
-nnoremap <Leader>n :NERDTreeToggle<CR>
-nnoremap <leader>f :NERDTreeFind<CR>
 let NERDTreeQuitOnOpen=1
 let NERDTreeWinSize=60
-
-" ,d to show the TernDef definition
-" TODO make this specific to Javascript
-nnoremap <Leader>d :TernDef<CR>
-
-" ,ev to quick-edit my .vimrc
-nnoremap <leader>ev :vsplit $MYVIMRC<cr>
-
-" ,sv to re-source my .vimrc
-nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " Normally, <c-w>v clones the current buffer
 " This causes it to create a new, blank window to the right
@@ -237,6 +225,7 @@ augroup local
     autocmd FileType less set sw=2 sts=2
     autocmd FileType mail                                        set tw=72
     autocmd BufRead,BufNewFile *.cljc                            set ft=clojure
+    autocmd BufRead,BufNewFile *.gv                              set ft=graphviz
 
     " Trim trailing whitespace on save
     autocmd BufWritePre * :%s/\s\+$//e
@@ -274,10 +263,8 @@ set smartcase
 set scrolloff=2
 set wildmode=longest,list
 
-" Inserts a code block when editing Markdown
-" TODO figure out how to only enable this when in Markdown mode
-"command -nargs=1 Code :normal i{% highlight <args> %}<Enter><Enter>{% endhighlight %}<Up>
-
+" Return a * search to the original place
+nnoremap * *N
 
 "============================================================
 " Status line
@@ -304,8 +291,65 @@ set laststatus=2
 nnoremap <C-e> :Eval<cr>
 nnoremap <S-C-e> :%Eval<cr>
 
+"============================================================
+" Spacemacs/Spacevim inspired mappings
+"
+" Let this be the way forward!
+"============================================================
 
+"------------------------------------------------------------
+" File commands SPC f...
+"------------------------------------------------------------
 
+nnoremap <leader>ft :NERDTreeToggle<cr>
+nnoremap <leader>ff :NERDTreeFind<cr>
+
+"------------------------------------------------------------
+" Table commands SPC t...
+"------------------------------------------------------------
+
+nnoremap <leader>t\| :Tabularize /\|<cr>
+
+"------------------------------------------------------------
+" Vimrc commands SPC v...
+"------------------------------------------------------------
+
+nnoremap <leader>ve :vsplit $MYVIMRC<cr>
+nnoremap <leader>vr :source $MYVIMRC<cr>
+
+"------------------------------------------------------------
+" Window commands SPC w...
+"------------------------------------------------------------
+
+" Jump to window
+nnoremap <leader>wh <c-w>h
+nnoremap <leader>wj <c-w>j
+nnoremap <leader>wk <c-w>k
+nnoremap <leader>wl <c-w>l
+
+" Move window
+nnoremap <leader>wH <c-w>H
+nnoremap <leader>wJ <c-w>J
+nnoremap <leader>wK <c-w>K
+nnoremap <leader>wL <c-w>L
+
+nnoremap <leader>wm <c-w>o
+
+nnoremap <leader>wn :new<cr>
+nnoremap <leader>wv :vnew<cr>
+
+nnoremap <leader>w= <c-w>=
+
+"============================================================
+" Plugins to try
+" https://github.com/ctjhoa/spacevim/blob/master/PLUGINS.md
+"============================================================
+" Plugin 'dhruvasagar/vim-table-mode'
+" Plugin 'airblade/vim-gitgutter'
+" https://github.com/jreybert/vimagit
+" https://github.com/Shougo/unite.vim
+" https://github.com/Shougo/denite.nvim
+"
 "============================================================
 " Resources
 "============================================================
