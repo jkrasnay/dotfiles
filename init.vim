@@ -193,6 +193,7 @@ set cursorline
 
 inoremap jj <Esc>
 let mapleader = " "
+let maplocalleader = ","
 
 let NERDTreeQuitOnOpen=1
 let NERDTreeWinSize=60
@@ -232,6 +233,17 @@ augroup local
 
     " In quickfix window, use Space to show file w/o changing windows
     autocmd FileType qf nnoremap <buffer> <space> <cr><c-w><c-p>
+
+    " Local commands for Clojure
+    autocmd FileType clojure nnoremap <buffer> <localleader>e :Eval<cr>
+    autocmd FileType clojure nnoremap <buffer> <localleader>E :%Eval<cr>
+    autocmd FileType clojure nnoremap <buffer> <localleader>t :RunTests<cr>
+
+    " Eval clojure on save
+    " This don't work so good:
+    " - you have to type an addtional Enter after saving
+    " - should exclude project.clj
+    "autocmd BufWritePost *.clj,*.cljc         Require
 
 augroup END
 
