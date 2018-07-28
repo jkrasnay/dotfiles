@@ -90,10 +90,13 @@ Plug 'venantius/vim-eastwood'
 " daF - Delete the current top-level form
 " ==  - indents the current COMPOUND FORM without moving the cursor
 " =-  - indents the current top-level COMPOUND FORM without moving the cursor
+" ,i  - surround current form with parens
+" ,o  - lift current form to replace parent form
+" ,O  - lift current element to replace parent form
 "
 Plug 'guns/vim-sexp'
 " disable auto insertion of matching parens
-let g:sexp_enable_insert_mode_mappings = 0
+"let g:sexp_enable_insert_mode_mappings = 0
 
 " Slamhound rewrites the ns declaration for Clojure namespaces
 " It's like an "organize imports" for Clojure
@@ -237,13 +240,17 @@ augroup local
     " Local commands for Clojure
     autocmd FileType clojure nnoremap <buffer> <localleader>e :Eval<cr>
     autocmd FileType clojure nnoremap <buffer> <localleader>E :%Eval<cr>
-    autocmd FileType clojure nnoremap <buffer> <localleader>t :RunTests<cr>
+    "autocmd FileType clojure nnoremap <buffer> <localleader>t :RunTests<cr>
+    autocmd FileType clojure nnoremap <buffer> <localleader>t :w<cr>:Require<cr>:Eval (clojure.test/run-tests)<cr>
 
     " Eval clojure on save
     " This don't work so good:
     " - you have to type an addtional Enter after saving
     " - should exclude project.clj
     "autocmd BufWritePost *.clj,*.cljc         Require
+
+    " Local commands for Markdown
+    autocmd FileType markdown nnoremap <buffer> <localleader>v r✓
 
 augroup END
 
@@ -274,9 +281,6 @@ set ignorecase
 set smartcase
 set scrolloff=2
 set wildmode=longest,list
-
-" Return a * search to the original place
-nnoremap * *N
 
 "============================================================
 " Status line
