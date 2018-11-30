@@ -1,11 +1,15 @@
 set et sw=4 sts=4 nu
 
 "============================================================
-" Vundle setup
+" Plug setup
 "============================================================
-
-" NOTE: INSTALL VUNDLE OR YOU'LL SEE VIM STARTUP ERRORS
-" See here: https://github.com/gmarik/Vundle.vim
+"
+" On new installations you'll have to manually install Plug:
+" https://github.com/junegunn/vim-plug
+"
+" When adding plugins here, remember to run "so ~/.vimrc" or Space V R
+" then run :PlugInstall
+"
 
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -13,23 +17,12 @@ filetype off                  " required
 " Required when running Fish shell
 set shell=bash
 
-" set the runtime path to include Vundle and initialize
-"set rtp+=~/.vim/bundle/Vundle.vim
-"call vundle#begin()
-
-" let Vundle manage Vundle, required
-"Plugin 'gmarik/Vundle.vim'
-
 call plug#begin('~/.local/share/nvim/plugged')
 
-"
-" When adding plugins here, remember to run "so ~/.vimrc" and :PluginInstall" afterwards
-"
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
 Plug 'kien/ctrlp.vim'
-
-Plug 'tpope/vim-markdown'
+Plug 'sheerun/vim-polyglot'
 
 " Alignment plugin
 " Select your block of text to align then enter :Tab /= to align, say, on the
@@ -37,29 +30,13 @@ Plug 'tpope/vim-markdown'
 " More info here: http://vimcasts.org/episodes/aligning-text-with-tabular-vim/
 Plug 'godlygeek/tabular'
 
-" Syntax coloring for LessCSS
-Plug 'groenewege/vim-less'
-
-" Shows pipe chars for indented lines
-" Disabled cuz it looks terrible in Clojure
-"Plug 'Yggdroot/indentLine'
-
 " Show matching parens in different colors
 Plug 'luochen1990/rainbow'
 let g:rainbow_active = 1
 
 "------------------------------------------------------------
-" Javascript
+" JavaScript
 "
-
-" Requires a external build step.
-" See: https://github.com/Valloric/YouCompleteMe
-"Plug 'Valloric/YouCompleteMe'
-
-"Plug 'marijnh/tern_for_vim'
-
-Plug 'altercation/vim-colors-solarized'
-Plug 'vinitkumar/vim-tomorrow-theme'
 
 " Recommended by http://oli.me.uk/2013/06/29/equipping-vim-for-javascript/
 " Improves JS syntax highlighting
@@ -104,14 +81,14 @@ Plug 'guns/vim-sexp'
 Plug 'guns/vim-slamhound'
 
 
+"------------------------------------------------------------
+" TypeScript
+"
+
+" Syntax highlighting
+Plug 'leafgarland/typescript-vim'
 
 
-
-" Recommended by http://oli.me.uk/2013/06/29/equipping-vim-for-javascript/
-" Auto-types matching brackets, quotes, etc.
-"Plug 'Raimondi/delimitMate' " This is just annoying, as you have to hit the delimiter anyway
-" Adds an extra line when hitting CR between braces
-"let delimitMate_expand_cr = 1
 
 " All the colorschemes!
 Plug 'flazz/vim-colorschemes'
@@ -137,13 +114,6 @@ Plug 'tpope/vim-fugitive'
 " Requires silver searcher to be installed
 " https://github.com/ggreer/the_silver_searcher
 Plug 'rking/ag.vim'
-
-" Syntax coloring for Terraform files
-Plug 'vim-scripts/vim-terraform'
-
-" All of your Plugins must be added before the following line
-"call vundle#end()            " required
-"filetype plugin indent on    " required
 
 " Deoplete autocompleter
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -173,15 +143,6 @@ set modeline
 syntax on
 filetype plugin indent on
 se t_Co=256
-
-"colorscheme solarized
-"set background=light
-"let g:solarized_termcolors=256
-
-"colorscheme Tomorrow
-"set background=light
-"highlight LineNr ctermbg=LightGrey
-"let g:colors_name="Tomorrow-Night-Bright"
 
 set background=dark
 colorscheme gruvbox
@@ -269,8 +230,8 @@ au FileType clojure nnoremap <buffer> <f3> [<c-d>
 "----------------------------------------
 " XML
 "----------------------------------------
-let g:xml_syntax_folding = 1
-au FileType xml setlocal foldmethod=syntax
+"let g:xml_syntax_folding = 3
+au FileType xml setlocal foldmethod=syntax foldlevel=9
 
 "============================================================
 " Search settings
