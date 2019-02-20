@@ -1,12 +1,6 @@
 #!/bin/sh
 
-for FILE in gitconfig vimrc; do
-    if [ -f ~/.$FILE ]; then
-        echo "~/.$FILE already exists"
-    else
-        FULL=`readlink -f $FILE`
-        echo "~/.$FILE -> $FULL"
-        ln -s `readlink -f $FILE` ~/.$FILE
-    fi
-done
+ln -s $(realpath gitconfig) ~/.gitconfig
+ln -s $(realpath init.vim) ~/.config/nvim/init.vim
+ln -s $(realpath clojure.vim) ~/.config/nvim/clojure.vim
 

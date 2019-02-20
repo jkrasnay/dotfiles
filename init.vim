@@ -75,6 +75,13 @@ Plug 'guns/vim-sexp'
 " disable auto insertion of matching parens
 "let g:sexp_enable_insert_mode_mappings = 0
 
+" from https://github.com/tpope/vim-sexp-mappings-for-regular-people
+" Mnemonic: the arrow shows the way to move the paren
+nmap <buffer> >(  <Plug>(sexp_emit_head_element)
+nmap <buffer> <)  <Plug>(sexp_emit_tail_element)
+nmap <buffer> <(  <Plug>(sexp_capture_prev_element)
+nmap <buffer> >)  <Plug>(sexp_capture_next_element)
+
 " Slamhound rewrites the ns declaration for Clojure namespaces
 " It's like an "organize imports" for Clojure
 " See the screencast here: https://vimeo.com/80650659
@@ -243,6 +250,8 @@ set smartcase
 set scrolloff=2
 set wildmode=longest,list
 
+nnoremap <c-l> :noh<cr><c-l>
+
 "============================================================
 " Status line
 "============================================================
@@ -265,8 +274,8 @@ set laststatus=2
 " vim-fireplace mappings
 "============================================================
 
-nnoremap <C-e> :Eval<cr>
-nnoremap <S-C-e> :%Eval<cr>
+"nnoremap <C-e> :Eval<cr>
+"nnoremap <S-C-e> :%Eval<cr>
 
 "============================================================
 " Spacemacs/Spacevim inspired mappings
@@ -334,3 +343,7 @@ nnoremap <leader>w= <c-w>=
 "
 "
 
+"============================================================
+" External configs
+"============================================================
+runtime clojure.vim
