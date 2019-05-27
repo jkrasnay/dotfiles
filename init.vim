@@ -21,8 +21,15 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
-Plug 'kien/ctrlp.vim'
 Plug 'sheerun/vim-polyglot'
+
+" Ctrl-P plug-in
+"
+" Search for files using ctrl-P
+"
+Plug 'ctrlpvim/ctrlp.vim'
+" Use git to search files. Respects .gitignore
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
 " Alignment plugin
 " Select your block of text to align then enter :Tab /= to align, say, on the
