@@ -17,9 +17,23 @@ function! clojure#ns_from_filename()
     return tr(ns, '/_', '.-')
 endfunction
 
-function! clojure#ns_decl_from_filename()
+function! clojure#ns_decl()
+
+    let filename = expand('%')
     let ns = clojure#ns_from_filename()
-    return '(ns ' . ns . '\n  (:require\n\n    ))'
+    let result = ['(ns ' . ns, '  (:require']
+
+    if filename =~ "_test"
+        call add(result, '    [clojure.test :refer [deftest is]]')
+    endif
+
+    if filename =~ "\.cljs$"
+        call add(result, '    [re-frame.core :as rf]')
+    endif
+
+    call add(result, '    ))')
+    return result
+
 endfunction
 
 function! clojure#insert_ns_decl()
@@ -30,22 +44,25 @@ function! clojure#insert_ns_decl()
     :normal i
 endfunction
 
-function! clojure#open_test_ns()
+" Returns the name of the corresponding test file of the current Clojure file
+function! clojure#test_file()
     " TODO: magic vs. non-magic?
     " TODO: specify case-sensitive
     " TODO: open the test file beside the current one
     " TODO: switch back to non-test namespace?
     let f1 = substitute(expand('%'), '\.clj[cs]\?', '_test&', '')
-    let f2 = substitute(f1, 'src/main', 'src/test', '')
-    "echom f2
-    " TODO following doesn't work, opens file literally called 'f2'
-    "edit f2
-    execute "edit " . f2
+    return substitute(f1, 'src/main', 'src/test', '')
 endfunction
 
+command! ClojureGoToTest exec ':vnew ' . clojure#test_file()
+command! ClojureInsertComment exec 'normal i;;<esc>60a=<esc>o;; <enter>;;<esc>k' | startinsert!
+command! ClojureInsertNs call append(0, clojure#ns_decl())
 
 augroup clojure
     autocmd!
-    autocmd FileType clojure nnoremap <buffer> <LocalLeader>gt :call clojure#open_test_ns()<cr>
-    autocmd FileType clojure nnoremap <buffer> <LocalLeader>ns :call clojure#insert_ns_decl()<cr>
+    autocmd FileType clojure nnoremap <buffer> <LocalLeader>gt :ClojureGoToTest<cr>
+    autocmd FileType clojure nnoremap <buffer> <LocalLeader>ic :ClojureInsertComment<cr>
+    autocmd FileType clojure nnoremap <buffer> <LocalLeader>in :ClojureInsertNs<cr>
+    autocmd BufNewFile *.clj call append(0, clojure#ns_decl())
 augroup END
+
