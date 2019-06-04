@@ -57,9 +57,17 @@ endfunction
 command! ClojureGoToTest exec ':vnew ' . clojure#test_file()
 command! ClojureInsertComment exec 'normal i;;<esc>60a=<esc>o;; <enter>;;<esc>k' | startinsert!
 command! ClojureInsertNs call append(0, clojure#ns_decl())
+command! ClojureClearNs exec 'Eval (doseq [x (keys (ns-interns *ns*))] (ns-unmap *ns* x))'
 
 augroup clojure
     autocmd!
+
+    autocmd FileType clojure nnoremap <buffer> <localleader>e :Eval<cr>
+    autocmd FileType clojure nnoremap <buffer> <localleader>E :%Eval<cr>
+    autocmd FileType clojure nnoremap <buffer> <localleader>R :ClojureClearNs<cr>:%Eval<cr>
+    "autocmd FileType clojure nnoremap <buffer> <localleader>t :RunTests<cr>
+    autocmd FileType clojure nnoremap <buffer> <localleader>t :w<cr>:Require<cr>:Eval (clojure.test/run-tests)<cr>
+
     autocmd FileType clojure nnoremap <buffer> <LocalLeader>gt :ClojureGoToTest<cr>
     autocmd FileType clojure nnoremap <buffer> <LocalLeader>ic :ClojureInsertComment<cr>
     autocmd FileType clojure nnoremap <buffer> <LocalLeader>in :ClojureInsertNs<cr>

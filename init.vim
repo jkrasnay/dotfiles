@@ -128,6 +128,10 @@ Plug 'tpope/vim-fugitive'
 " Requires silver searcher to be installed
 " https://github.com/ggreer/the_silver_searcher
 Plug 'rking/ag.vim'
+" Mappings to quickly move through the results
+map <C-j> :cn<CR>
+map <C-k> :cp<CR>
+
 
 " Deoplete autocompleter
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -211,18 +215,6 @@ augroup local
 
     " In quickfix window, use Space to show file w/o changing windows
     autocmd FileType qf nnoremap <buffer> <space> <cr><c-w><c-p>
-
-    " Local commands for Clojure
-    autocmd FileType clojure nnoremap <buffer> <localleader>e :Eval<cr>
-    autocmd FileType clojure nnoremap <buffer> <localleader>E :%Eval<cr>
-    "autocmd FileType clojure nnoremap <buffer> <localleader>t :RunTests<cr>
-    autocmd FileType clojure nnoremap <buffer> <localleader>t :w<cr>:Require<cr>:Eval (clojure.test/run-tests)<cr>
-
-    " Eval clojure on save
-    " This don't work so good:
-    " - you have to type an addtional Enter after saving
-    " - should exclude project.clj
-    "autocmd BufWritePost *.clj,*.cljc         Require
 
     " Local commands for Markdown
     autocmd FileType markdown nnoremap <buffer> <localleader>v r✓
