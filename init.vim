@@ -145,6 +145,15 @@ Plug 'clojure-vim/async-clj-omni'
 let g:deoplete#keyword_patterns = {}
 let g:deoplete#keyword_patterns.clojure = '[\w!$%&*+/:<=>?@\^_~\-\.#]*'
 
+" Async Linter support
+"
+" Also run: brew install candid82/brew/joker
+"           brew install borkdude/brew/clj-kondo
+"
+" These are automatically recognized by ALE
+"
+Plug 'w0rp/ale'
+
 call plug#end()
 
 "============================================================
