@@ -355,3 +355,4 @@ nnoremap <leader>w= <c-w>=
 " External configs
 "============================================================
 runtime clojure.vim
+runtime notes.vim
