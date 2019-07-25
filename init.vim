@@ -156,6 +156,16 @@ Plug 'w0rp/ale'
 
 call plug#end()
 
+" FuzzyFinder
+" Need to run 'brew install fzf'
+" Also, need to set this in ~/.bash_profile:
+"
+" export FZF_DEFAULT_COMMAND='ag --nocolor --hidden -g ""'
+"
+" (this is part of my dotfiles repo)
+"
+set rtp+=/usr/local/opt/fzf
+
 "============================================================
 " General settings
 "============================================================
@@ -297,6 +307,7 @@ set laststatus=2
 
 nnoremap <leader>ft :NERDTreeToggle<cr>
 nnoremap <leader>ff :NERDTreeFind<cr>
+nnoremap <leader>fz :FZF<cr>
 
 "------------------------------------------------------------
 " Table commands SPC t...
