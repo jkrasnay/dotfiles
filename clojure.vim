@@ -58,6 +58,7 @@ command! ClojureGoToTest exec ':vnew ' . clojure#test_file()
 command! ClojureInsertComment exec 'normal i;;<esc>60a=<esc>o;; <enter>;;<esc>k' | startinsert!
 command! ClojureInsertNs call append(0, clojure#ns_decl())
 command! ClojureClearNs exec 'Eval (doseq [x (keys (ns-interns *ns*))] (ns-unmap *ns* x))'
+command! CljsRepl exec 'CljEval (figwheel.main.api/cljs-repl "dev")'
 
 augroup clojure
     autocmd!
@@ -69,8 +70,8 @@ augroup clojure
     autocmd FileType clojure nnoremap <buffer> <localleader>t :w<cr>:Require<cr>:Eval (clojure.test/run-tests)<cr>
 
     autocmd FileType clojure nnoremap <buffer> <LocalLeader>gt :ClojureGoToTest<cr>
-    autocmd FileType clojure nnoremap <buffer> <LocalLeader>ic :ClojureInsertComment<cr>
-    autocmd FileType clojure nnoremap <buffer> <LocalLeader>in :ClojureInsertNs<cr>
+    autocmd FileType clojure nnoremap <buffer> <LocalLeader>c :ClojureInsertComment<cr>
+    autocmd FileType clojure nnoremap <buffer> <LocalLeader>n :ClojureInsertNs<cr>
     autocmd BufNewFile *.clj call append(0, clojure#ns_decl())
 augroup END
 
