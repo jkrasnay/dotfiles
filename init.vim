@@ -154,6 +154,21 @@ let g:deoplete#keyword_patterns.clojure = '[\w!$%&*+/:<=>?@\^_~\-\.#]*'
 "
 Plug 'w0rp/ale'
 
+" Database
+"
+" You need to have a PostgreSQL client installed:
+"
+"   brew install libpq
+"   brew link --force libpq
+"
+" Normal usage: select a range, then type :DB to eval it against the server.
+"
+" See https://github.com/tpope/vim-dadbod/blob/master/doc/dadbod.txt
+"
+Plug 'tpope/vim-dadbod'
+
+let g:db = 'postgresql://effreg:fubar@localhost/'
+
 call plug#end()
 
 " FuzzyFinder
