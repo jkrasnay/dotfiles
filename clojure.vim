@@ -6,6 +6,29 @@
 "
 " Dev notes:
 " - to reload run `:so %`
+"
+"
+" The main init.vim loads vim-fireplace, which connects to an nrepl
+" normally started by `lein repl`.
+"
+"
+" AUTOCOMPLETION
+"
+" Autocompletion is done by vim-fireplace triggered by <c-x><c-o>.
+" We map <c-space> to be more convenient. We also map <c-j> and
+" <c-k> to step through results instead of the normal <c-n> and
+" <c-p>.
+"
+" You need to install the cider-nrepl plugin in your `project.clj` to
+" enable the nrepl middleware that enables autocompletion.
+"
+"
+" CLOJURESCRIPT
+"
+" In order to eval or autocomplete ClojureScript we need to start the
+" Piggieback nrepl middleware by running `:Piggieback (figwheel.main.api/repl-env "dev")`
+" The <localleader>p shortcut does this for us.
+"
 
 
 " Creates a namespace decl in the current buffer.
@@ -63,8 +86,8 @@ command! CljsRepl exec 'CljEval (figwheel.main.api/cljs-repl "dev")'
 augroup clojure
     autocmd!
 
-    autocmd FileType clojure nnoremap <buffer> <localleader>e :Eval<cr>
-    autocmd FileType clojure nnoremap <buffer> <localleader>E :%Eval<cr>
+    autocmd FileType clojure nnoremap <buffer> <localleader>v :Eval<cr>
+    autocmd FileType clojure nnoremap <buffer> <localleader>V :%Eval<cr>
     autocmd FileType clojure nnoremap <buffer> <localleader>R :ClojureClearNs<cr>:%Eval<cr>
     "autocmd FileType clojure nnoremap <buffer> <localleader>t :RunTests<cr>
     autocmd FileType clojure nnoremap <buffer> <localleader>t :w<cr>:Require<cr>:Eval (clojure.test/run-tests)<cr>
@@ -72,6 +95,7 @@ augroup clojure
     autocmd FileType clojure nnoremap <buffer> <LocalLeader>gt :ClojureGoToTest<cr>
     autocmd FileType clojure nnoremap <buffer> <LocalLeader>c :ClojureInsertComment<cr>
     autocmd FileType clojure nnoremap <buffer> <LocalLeader>n :ClojureInsertNs<cr>
+    autocmd FileType clojure nnoremap <buffer> <LocalLeader>p :Piggieback (figwheel.main.api/repl-env "dev")<cr>
     autocmd BufNewFile *.clj call append(0, clojure#ns_decl())
 augroup END
 

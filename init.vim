@@ -62,7 +62,11 @@ Plug 'pangloss/vim-javascript'
 Plug 'tpope/vim-fireplace'
 
 " Clojure support for Leiningen
-Plug 'tpope/vim-salve'
+"
+" I think this starts a JVM with Clojure if you don't already have an nrepl
+" running. Not needed and potentially confusing.
+"
+"Plug 'tpope/vim-salve'
 
 " Clojure Syntastic checking
 Plug 'venantius/vim-eastwood'
@@ -128,22 +132,43 @@ Plug 'tpope/vim-fugitive'
 " Requires silver searcher to be installed
 " https://github.com/ggreer/the_silver_searcher
 Plug 'rking/ag.vim'
-" Mappings to quickly move through the results
-map <C-j> :cn<CR>
-map <C-k> :cp<CR>
 
 
+
+" NOTE ON DEOPLETE
+"
+" Deoplete is distinct from the autocompletion provided by vim-fireplace for
+" Clojure, and they work differently...
+"
+" - Fireplace needs you to trigger the completion via <c-x><c-o> (remapped to
+"   <c-space> below). By default Deoplete just agressively shows the popup
+"   with completions.
+"
+" - Deoplete's completions do not seem to find Clojure completions, even
+"   though Fireplace sets `omnifunc` appropriately.
+"
+" - Fireplace's completions show the preview window with the doc of the
+"   function.
+"
+" For now I've disabled Deoplete. I find its aggressive popup display
+" distracting and perhaps slow.
+"
 " Deoplete autocompleter
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-let g:deoplete#enable_at_startup = 1
+"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"let g:deoplete#enable_at_startup = 1
 " Use <tab> to cycle through proposals; <c-n> is too awkward
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-inoremap <expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
+"inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+"inoremap <expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
 
+" See https://stackoverflow.com/a/47683525/2570880
+"let g:deoplete#disable_auto_complete = 1
+"inoremap <expr> <C-n>  deoplete#manual_complete()
+
+" I think fireplace handles this now
 " Deoplete support for clojure
-Plug 'clojure-vim/async-clj-omni'
-let g:deoplete#keyword_patterns = {}
-let g:deoplete#keyword_patterns.clojure = '[\w!$%&*+/:<=>?@\^_~\-\.#]*'
+"Plug 'clojure-vim/async-clj-omni'
+"let g:deoplete#keyword_patterns = {}
+"let g:deoplete#keyword_patterns.clojure = '[\w!$%&*+/:<=>?@\^_~\-\.#]*'
 
 " Async Linter support
 "
@@ -153,6 +178,9 @@ let g:deoplete#keyword_patterns.clojure = '[\w!$%&*+/:<=>?@\^_~\-\.#]*'
 " These are automatically recognized by ALE
 "
 Plug 'w0rp/ale'
+
+" Disable Joker linting
+let g:ale_linters = {'clojure': ['clj-kondo']}
 
 " Database
 "
@@ -283,8 +311,6 @@ set smartcase
 set scrolloff=2
 set wildmode=longest,list
 
-nnoremap <c-l> :noh<cr><c-l>
-
 "============================================================
 " Status line
 "============================================================
@@ -302,6 +328,24 @@ set laststatus=2
 ""current line and total lines
 "set statusline+=\ L%l/%L
 
+
+"============================================================
+" Convenience Key Mappings
+"============================================================
+
+" Make <c-l> clear highlighting in addition to its original function of
+" redrawing the screen
+nnoremap <c-l> :noh<cr><c-l>
+
+" Mappings to quickly move through the results
+"
+" If a popup menu is visible (e.g. via autocomplete) then these
+" move between entries, else moves between the results in the
+" quickfix window, such as that shown by :Ag.
+inoremap <expr> <C-j> pumvisible() ? "\<c-n>" : "\<c-j>"
+inoremap <expr> <C-k> pumvisible() ? "\<c-p>" : "\<c-k>"
+nnoremap <C-j> :cn<CR>
+nnoremap <C-k> :cp<CR>
 
 "============================================================
 " vim-fireplace mappings
@@ -353,7 +397,7 @@ nnoremap <leader>wJ <c-w>J
 nnoremap <leader>wK <c-w>K
 nnoremap <leader>wL <c-w>L
 
-nnoremap <leader>wm <c-w>o
+nnoremap <leader>wo <c-w>o
 
 nnoremap <leader>wn :new<cr>
 nnoremap <leader>wv :vnew<cr>
