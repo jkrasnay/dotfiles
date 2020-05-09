@@ -1,6 +1,36 @@
-#!/bin/sh
+#!/bin/bash
+set -e
 
-ln -s $(realpath gitconfig) ~/.gitconfig
-ln -s $(realpath init.vim) ~/.config/nvim/init.vim
-ln -s $(realpath clojure.vim) ~/.config/nvim/clojure.vim
+ARG=$1
 
+# See https://stackoverflow.com/a/246128/2570880
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+
+function install {
+    FILE=$1
+    TARGET=$2
+    TARGET_DIR=$(dirname $TARGET)
+
+    if [ -e $TARGET_DIR ]; then
+        if [ ! -d $TARGET_DIR ]; then
+            echo "$TARGET_DIR is not a directory"
+            exit 1
+        fi
+    else
+        mkdir -p $TARGET_DIR
+    fi
+
+    if [ -e $TARGET -a ! -L $TARGET -a "$ARG" != "-f" ]; then
+        echo "$TARGET exists and is not a symlink; use ./install -f to force."
+    else
+        ln -sf $DIR/$FILE $TARGET_DIR
+        echo "$1 => $2"
+    fi
+}
+
+install gitconfig   ~/.gitconfig
+install init.vim    ~/.config/nvim/init.vim
+install clojure.vim ~/.config/nvim/clojure.vim
+install UltiSnips   ~/.config/nvim/UltiSnips
+install a2psrc      ~/.a2ps/a2psrc
