@@ -29,8 +29,10 @@ function install {
     fi
 }
 
-install gitconfig   ~/.gitconfig
-install init.vim    ~/.config/nvim/init.vim
-install clojure.vim ~/.config/nvim/clojure.vim
-install UltiSnips   ~/.config/nvim/UltiSnips
-install a2psrc      ~/.a2ps/a2psrc
+install bash_profile ~/.bash_profile
+install gitconfig    ~/.gitconfig
+install init.vim     ~/.config/nvim/init.vim
+install clojure.vim  ~/.config/nvim/clojure.vim
+install notes.vim    ~/.config/nvim/notes.vim
+install UltiSnips    ~/.config/nvim/UltiSnips
+install a2psrc       ~/.a2ps/a2psrc
