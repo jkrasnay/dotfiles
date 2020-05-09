@@ -86,8 +86,8 @@ command! CljsRepl exec 'CljEval (figwheel.main.api/cljs-repl "dev")'
 augroup clojure
     autocmd!
 
-    autocmd FileType clojure nnoremap <buffer> <localleader>v :Eval<cr>
-    autocmd FileType clojure nnoremap <buffer> <localleader>V :%Eval<cr>
+"    autocmd FileType clojure nnoremap <buffer> <localleader>v :Eval<cr>
+"    autocmd FileType clojure nnoremap <buffer> <localleader>V :%Eval<cr>
     autocmd FileType clojure nnoremap <buffer> <localleader>R :ClojureClearNs<cr>:%Eval<cr>
     "autocmd FileType clojure nnoremap <buffer> <localleader>t :RunTests<cr>
     autocmd FileType clojure nnoremap <buffer> <localleader>t :w<cr>:Require<cr>:Eval (clojure.test/run-tests)<cr>
@@ -95,7 +95,6 @@ augroup clojure
     autocmd FileType clojure nnoremap <buffer> <LocalLeader>gt :ClojureGoToTest<cr>
     autocmd FileType clojure nnoremap <buffer> <LocalLeader>c :ClojureInsertComment<cr>
     autocmd FileType clojure nnoremap <buffer> <LocalLeader>n :ClojureInsertNs<cr>
-    autocmd FileType clojure nnoremap <buffer> <LocalLeader>p :Piggieback (figwheel.main.api/repl-env "dev")<cr>
+    autocmd FileType clojure nnoremap <buffer> <LocalLeader>cp :ConjurePiggieback (figwheel.main.api/repl-env "dev")<cr>
     autocmd BufNewFile *.clj call append(0, clojure#ns_decl())
 augroup END
-

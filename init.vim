@@ -13,6 +13,7 @@ set et sw=4 sts=4 nu
 
 set nocompatible              " be iMproved, required
 filetype off                  " required
+set lazyredraw                " improves Clojure editing format
 
 " Required when running Fish shell
 set shell=bash
@@ -41,6 +42,9 @@ Plug 'godlygeek/tabular'
 Plug 'luochen1990/rainbow'
 let g:rainbow_active = 1
 
+" The bang version will try to download the prebuilt binary if cargo does not exist.
+Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
+
 "------------------------------------------------------------
 " JavaScript
 "
@@ -59,7 +63,8 @@ Plug 'pangloss/vim-javascript'
 "
 
 " Clojure REPL support
-Plug 'tpope/vim-fireplace'
+"Plug 'tpope/vim-fireplace'
+Plug 'Olical/conjure', {'tag': 'v3.0.0'}
 
 " Clojure support for Leiningen
 "
@@ -135,40 +140,10 @@ Plug 'rking/ag.vim'
 
 
 
-" NOTE ON DEOPLETE
-"
-" Deoplete is distinct from the autocompletion provided by vim-fireplace for
-" Clojure, and they work differently...
-"
-" - Fireplace needs you to trigger the completion via <c-x><c-o> (remapped to
-"   <c-space> below). By default Deoplete just agressively shows the popup
-"   with completions.
-"
-" - Deoplete's completions do not seem to find Clojure completions, even
-"   though Fireplace sets `omnifunc` appropriately.
-"
-" - Fireplace's completions show the preview window with the doc of the
-"   function.
-"
-" For now I've disabled Deoplete. I find its aggressive popup display
-" distracting and perhaps slow.
-"
 " Deoplete autocompleter
-"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-"let g:deoplete#enable_at_startup = 1
-" Use <tab> to cycle through proposals; <c-n> is too awkward
-"inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-"inoremap <expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+let g:deoplete#enable_at_startup = 1
 
-" See https://stackoverflow.com/a/47683525/2570880
-"let g:deoplete#disable_auto_complete = 1
-"inoremap <expr> <C-n>  deoplete#manual_complete()
-
-" I think fireplace handles this now
-" Deoplete support for clojure
-"Plug 'clojure-vim/async-clj-omni'
-"let g:deoplete#keyword_patterns = {}
-"let g:deoplete#keyword_patterns.clojure = '[\w!$%&*+/:<=>?@\^_~\-\.#]*'
 
 " Async Linter support
 "
@@ -195,7 +170,25 @@ let g:ale_linters = {'clojure': ['clj-kondo']}
 "
 Plug 'tpope/vim-dadbod'
 
-let g:db = 'postgresql://effreg:fubar@localhost/'
+let g:db = 'postgresql://erbium:password@localhost/'
+
+" Show autocomplete preview in NeoVim's floating window
+"
+" Requires Neovim 0.4
+"
+" Found via https://oli.me.uk/getting-started-with-clojure-neovim-and-conjure-in-minutes/
+"
+Plug 'ncm2/float-preview.nvim'
+set completeopt-=preview
+let g:float_preview#docked = 1
+let g:float_preview#max_width = 120
+let g:float_preview#max_height = 40
+
+" Write plugins in Fennel, a Clojure-like LISP that compiles to Lua
+Plug 'Olical/aniseed', { 'tag': 'v3.0.0' }
+
+" Snippets editor
+Plug 'SirVer/ultisnips'
 
 call plug#end()
 
@@ -238,6 +231,9 @@ set cursorline
 inoremap jj <Esc>
 let mapleader = " "
 let maplocalleader = ","
+
+cnoremap <c-a> <home>
+cnoremap <c-e> <end>
 
 let NERDTreeQuitOnOpen=1
 let NERDTreeWinSize=60
