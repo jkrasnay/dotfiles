@@ -45,6 +45,35 @@ let g:rainbow_active = 1
 " The bang version will try to download the prebuilt binary if cargo does not exist.
 Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
 
+" Show menu of completions of multi-keystroke mappings
+Plug 'liuchengxu/vim-which-key'
+
+" Improved bullet handling for Asciidoc docs
+" Still doesn't work great:
+" - on word wrap in a bullet item, text is not indented
+" - hitting `gq` on a selection with * bullet causes the bullet to
+"   repeat, at least in Asciidoc. I think this is b/c vim thinks it's
+"   a comment. set formatoptions-=cro does not seem to help.
+"
+" This helps with single-level indents:
+" http://www.methods.co.nz/asciidoc/chunked/ch36.html#X61
+"
+" This hijacks the Enter key on autocomplete. Disabled for now.
+"Plug 'dkarter/bullets.vim'
+"let g:bullets_enabled_file_types = [
+"    \ 'markdown',
+"    \ 'text',
+"    \ 'gitcommit',
+"    \ 'scratch',
+"    \ 'asciidoc'
+"    \]
+
+" <c-w>o to zoom window to full size, again to restore previous layout
+" Nice thought but...
+" - prints a bunch of errors when zooming
+" - slow when un-zooming (~3 seconds)
+"Plug 'vim-scripts/ZoomWin'
+
 "------------------------------------------------------------
 " JavaScript
 "
@@ -64,7 +93,7 @@ Plug 'pangloss/vim-javascript'
 
 " Clojure REPL support
 "Plug 'tpope/vim-fireplace'
-Plug 'Olical/conjure', {'tag': 'v3.0.0'}
+Plug 'Olical/conjure', {'tag': 'v4.3.1'}
 
 " Clojure support for Leiningen
 "
@@ -105,6 +134,12 @@ Plug 'guns/vim-slamhound'
 
 
 "------------------------------------------------------------
+" Fennel
+"
+Plug 'bakpakin/fennel.vim'
+
+
+"------------------------------------------------------------
 " TypeScript
 "
 
@@ -142,7 +177,13 @@ Plug 'rking/ag.vim'
 
 " Deoplete autocompleter
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" When enabled, adds a short pause after typing each space.
+" This can be very distracting!
 let g:deoplete#enable_at_startup = 1
+"call deoplete#custom#option('auto_complete_delay', 200)
+
+" Map omnicomplete to Ctrl-Space
+inoremap <c-space> <c-x><c-o>
 
 
 " Async Linter support
@@ -185,10 +226,19 @@ let g:float_preview#max_width = 120
 let g:float_preview#max_height = 40
 
 " Write plugins in Fennel, a Clojure-like LISP that compiles to Lua
-Plug 'Olical/aniseed', { 'tag': 'v3.0.0' }
+Plug 'Olical/aniseed', { 'tag': 'v3.6.1' }
 
 " Snippets editor
+"
+" Snippets are in files under ~/.config/nvim/UltiSnips, which is managed by my
+" dotfiles project. They are immediately loaded upon save.
+"
 Plug 'SirVer/ultisnips'
+
+" Vim Wiki
+"
+" <leader>ww to open the wiki
+Plug 'vimwiki/vimwiki'
 
 call plug#end()
 
@@ -231,6 +281,8 @@ set cursorline
 inoremap jj <Esc>
 let mapleader = " "
 let maplocalleader = ","
+nnoremap <silent> <leader>      :<c-u>WhichKey '<Space>'<CR>
+nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
 
 cnoremap <c-a> <home>
 cnoremap <c-e> <end>
@@ -243,9 +295,12 @@ let NERDTreeWinSize=60
 set splitright
 nnoremap <c-w>v :vnew<cr>
 
-" Map omnicomplete to Ctrl-Space
-inoremap <c-space> <c-x><c-o>
+" Must call after plug#end()
+" Stops deoplete from slowing down my typing
+call deoplete#custom#option('auto_complete_delay', 200)
 
+" In visual mode, Y copies to the system keyboard
+vmap Y "+y
 
 "============================================================
 " File types
@@ -262,7 +317,7 @@ augroup local
     " Tab and word-wrap settings
     autocmd BufRead,BufNewFile *.md,*.markdown,*.txt             set tw=72
     autocmd BufRead,BufNewFile *.md,*.markdown,*.txt             setlocal spell spelllang=en_ca
-    autocmd BufRead,BufNewFile *.css,*.less,*.js,*.html,*.xml    set sw=2 sts=2
+    autocmd BufRead,BufNewFile *.css,*.less,*.scss,*.js,*.html,*.xml    set sw=2 sts=2
     autocmd FileType less set sw=2 sts=2
     autocmd FileType mail                                        set tw=72
     autocmd BufRead,BufNewFile *.cljc                            set ft=clojure
@@ -283,13 +338,6 @@ augroup END
 " SQL
 "----------------------------------------
 let g:sql_type_default = 'pgsql'
-
-"----------------------------------------
-" Clojure
-"----------------------------------------
-
-" Hit <f3> to go to symbol definition
-au FileType clojure nnoremap <buffer> <f3> [<c-d>
 
 "----------------------------------------
 " XML
@@ -329,9 +377,8 @@ set laststatus=2
 " Convenience Key Mappings
 "============================================================
 
-" Make <c-l> clear highlighting in addition to its original function of
-" redrawing the screen
-nnoremap <c-l> :noh<cr><c-l>
+" Clear highlight with \ (opposite of /)
+nnoremap \ :noh<cr>
 
 " Mappings to quickly move through the results
 "

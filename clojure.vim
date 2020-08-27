@@ -92,6 +92,9 @@ augroup clojure
     "autocmd FileType clojure nnoremap <buffer> <localleader>t :RunTests<cr>
     autocmd FileType clojure nnoremap <buffer> <localleader>t :w<cr>:Require<cr>:Eval (clojure.test/run-tests)<cr>
 
+    " Go to definition
+    autocmd FileType clojure nnoremap <buffer> <LocalLeader>gd [<c-d>
+
     autocmd FileType clojure nnoremap <buffer> <LocalLeader>gt :ClojureGoToTest<cr>
     autocmd FileType clojure nnoremap <buffer> <LocalLeader>c :ClojureInsertComment<cr>
     autocmd FileType clojure nnoremap <buffer> <LocalLeader>n :ClojureInsertNs<cr>
