@@ -36,6 +36,7 @@ else
 fi
 
 install bash_profile ~/.bash_profile
+install bashrc       ~/.bashrc
 install gitconfig    ~/.gitconfig
 install init.vim     $NVIM_CONFIG/init.vim
 install clojure.vim  $NVIM_CONFIG/clojure.vim
