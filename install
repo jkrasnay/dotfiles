@@ -29,17 +29,7 @@ function install {
     fi
 }
 
-if [ "$OS" == "Windows_NT" ]; then
-    NVIM_CONFIG="~/AppData/Local/nvim"
-else
-    NVIM_CONFIG="~/.config/nvim"
-fi
-
 install bash_profile ~/.bash_profile
 install bashrc       ~/.bashrc
 install gitconfig    ~/.gitconfig
-install init.vim     $NVIM_CONFIG/init.vim
-install clojure.vim  $NVIM_CONFIG/clojure.vim
-install notes.vim    $NVIM_CONFIG/notes.vim
-install UltiSnips    $NVIM_CONFIG/UltiSnips
 install a2psrc       ~/.a2ps/a2psrc
