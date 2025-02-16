@@ -24,8 +24,8 @@ function install {
     if [ -e $TARGET -a ! -L $TARGET -a "$ARG" != "-f" ]; then
         echo "$TARGET exists and is not a symlink; use ./install -f to force."
     else
-        ln -sf $DIR/$FILE $TARGET_DIR
-        echo "$1 => $2"
+        ln -sf $DIR/$FILE $TARGET
+        echo "$TARGET -> $DIR/$FILE"
     fi
 }
 
@@ -33,3 +33,5 @@ install bash_profile ~/.bash_profile
 install bashrc       ~/.bashrc
 install gitconfig    ~/.gitconfig
 install a2psrc       ~/.a2ps/a2psrc
+install wezterm.lua  ~/.wezterm.lua
+install hammerspoon  ~/.hammerspoon
