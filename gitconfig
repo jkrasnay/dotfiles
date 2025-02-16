@@ -5,5 +5,10 @@
 	ui = true
 [push]
 	default = simple
+	autoSetupRemote = true
 [log]
 	decorate = true
+[init]
+	defaultBranch = main
+[diff]
+	external = difft
