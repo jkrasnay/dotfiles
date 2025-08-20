@@ -29,9 +29,10 @@ function install {
     fi
 }
 
-install bash_profile ~/.bash_profile
-install bashrc       ~/.bashrc
-install gitconfig    ~/.gitconfig
-install a2psrc       ~/.a2ps/a2psrc
-install wezterm.lua  ~/.wezterm.lua
-install hammerspoon  ~/.hammerspoon
+install bash_profile   ~/.bash_profile
+install bashrc         ~/.bashrc
+install gitconfig      ~/.gitconfig
+install a2psrc         ~/.a2ps/a2psrc
+install wezterm.lua    ~/.wezterm.lua
+install hammerspoon    ~/.hammerspoon
+install aerospace.toml ~/.config/aerospace/aerospace.toml
