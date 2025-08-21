@@ -181,14 +181,14 @@ automatically-unhide-macos-hidden-apps = false
     k = ['join-with up', 'mode main']
     l = ['join-with right', 'mode main']
 
-    a = 'move-node-to-workspace A'
-    s = 'move-node-to-workspace S'
-    d = 'move-node-to-workspace D'
-    f = 'move-node-to-workspace F'
-    g = 'move-node-to-workspace G'
+    a = ['move-node-to-workspace A', 'mode main']
+    s = ['move-node-to-workspace S', 'mode main']
+    d = ['move-node-to-workspace D', 'mode main']
+    f = ['move-node-to-workspace F', 'mode main']
+    g = ['move-node-to-workspace G', 'mode main']
 
-    z = 'move-node-to-workspace Z'
-    x = 'move-node-to-workspace X'
-    c = 'move-node-to-workspace C'
-    v = 'move-node-to-workspace V'
-    b = 'move-node-to-workspace B'
+    z = ['move-node-to-workspace Z', 'mode main']
+    x = ['move-node-to-workspace X', 'mode main']
+    c = ['move-node-to-workspace C', 'mode main']
+    v = ['move-node-to-workspace V', 'mode main']
+    b = ['move-node-to-workspace B', 'mode main']
