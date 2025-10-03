@@ -120,12 +120,13 @@ automatically-unhide-macos-hidden-apps = false
     alt-b = 'workspace B'
 
     alt-i = 'fullscreen' # Toggle between floating and tiling layout
-    alt-o = 'layout floating tiling' # Toggle between floating and tiling layout
+    alt-o = ['layout floating tiling','exec-and-forget open -g hammerspoon://center-window'] # Toggle between floating and tiling layout
 
     alt-m = 'mode merge'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#exec-and-forget
     alt-enter = 'exec-and-forget wezterm start'
+    alt-space = 'exec-and-forget open -a firefox -n'
 
 [mode.merge.binding]
     r = ['flatten-workspace-tree', 'mode main'] # reset layout
@@ -146,3 +147,8 @@ automatically-unhide-macos-hidden-apps = false
     c = ['move-node-to-workspace C', 'mode main']
     v = ['move-node-to-workspace V', 'mode main']
     b = ['move-node-to-workspace B', 'mode main']
+
+
+[[on-window-detected]]
+    if.app-id = 'com.apple.FaceTime'
+    run = ['layout floating']
