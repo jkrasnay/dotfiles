@@ -183,3 +183,46 @@ hs.notify.new({
     title='Hammerspoon',
     informativeText='Config loaded!'
 }):send()
+
+-------------------------------------------------------------------------------
+-- Clip Markdown link from current Firefox page
+-------------------------------------------------------------------------------
+
+function getFirefoxTitle()
+    local firefox = hs.application.get("Firefox")
+    if firefox then
+        local win = firefox:focusedWindow()
+        if win then
+            return win:title()
+        end
+    end
+end
+
+function getFirefoxURL()
+    local firefox = hs.application.get("Firefox")
+    if firefox then
+        hs.eventtap.keyStroke({"cmd"}, "l")
+        hs.timer.usleep(50000) -- 50ms delay
+        hs.eventtap.keyStroke({"cmd"}, "c")
+        hs.timer.usleep(50000)
+        hs.eventtap.keyStroke({}, "escape")
+        hs.timer.usleep(50000)
+        hs.eventtap.keyStroke({}, "escape")
+        hs.timer.usleep(50000)
+        return hs.pasteboard.getContents()
+    end
+end
+
+function copyFirefoxLink()
+    local title = getFirefoxTitle()
+    local url = getFirefoxURL()
+    if url and title then
+        hs.pasteboard.setContents("[" .. title .. "](" .. url .. ")")
+        hs.alert.show("Copied Markdown link to clipboard")
+    else
+        hs.alert.show("Unable to copy Firefox title/URL")
+    end
+end
+
+-- Bind this function to a hotkey, for example, F1
+hs.hotkey.bind({"cmd", "alt"}, "C", copyFirefoxLink)
