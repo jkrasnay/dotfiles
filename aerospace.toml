@@ -152,3 +152,13 @@ automatically-unhide-macos-hidden-apps = false
 [[on-window-detected]]
     if.app-id = 'com.apple.FaceTime'
     run = ['layout floating']
+
+
+[[on-window-detected]]
+    if.app-id = 'us.zoom.xos'
+    run = ['layout floating']
+
+
+[[on-window-detected]]
+    if.app-id = 'org.keepassxc.keepassxc'
+    run = ['layout floating']
