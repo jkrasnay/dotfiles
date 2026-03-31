@@ -31,7 +31,6 @@ function install {
 
 install gitconfig            ~/.gitconfig
 install a2psrc               ~/.a2ps/a2psrc
-install wezterm.lua          ~/.wezterm.lua
 install hammerspoon/init.lua ~/.hammerspoon/init.lua
 install aerospace.toml       ~/.config/aerospace/aerospace.toml
 install pg_service.conf      ~/.pg_service.conf
