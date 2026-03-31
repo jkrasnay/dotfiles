@@ -1,0 +1,5 @@
+--date-format %Y-%m-%d
+--file main.ledger
+--strict
+--wide
+--payee-width 80

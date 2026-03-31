@@ -162,3 +162,8 @@ automatically-unhide-macos-hidden-apps = false
 [[on-window-detected]]
     if.app-id = 'org.keepassxc.keepassxc'
     run = ['layout floating']
+
+
+[[on-window-detected]]
+    if.window-title-regex-substring = 'New Message'
+    run = ['layout floating', 'exec-and-forget open -g hammerspoon://center-window']

@@ -1,0 +1,6 @@
+\pset border 2
+\pset linestyle unicode
+\pset null ¤
+\pset format wrapped
+\set AUTOCOMMIT off
+\timing
