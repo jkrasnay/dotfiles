@@ -33,6 +33,7 @@ install gitconfig            ~/.gitconfig
 install a2psrc               ~/.a2ps/a2psrc
 install hammerspoon/init.lua ~/.hammerspoon/init.lua
 install aerospace.toml       ~/.config/aerospace/aerospace.toml
+install config.ghostty       ~/.config/ghostty/config.ghostty
 install pg_service.conf      ~/.pg_service.conf
 install psqlrc               ~/.psqlrc
 install ledgerrc             ~/.ledgerrc

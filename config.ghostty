@@ -1,0 +1,6 @@
+copy-on-select = clipboard
+cursor-style = block
+cursor-style-blink = true
+shell-integration-features = no-cursor
+theme = Gruvbox Dark
+window-padding-y = 0,6
